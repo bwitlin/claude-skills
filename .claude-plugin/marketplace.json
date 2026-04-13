@@ -4,14 +4,14 @@
     "name": "Brian Witlin"
   },
   "metadata": {
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "plugins": [
     {
       "name": "feedback",
       "source": ".",
       "description": "Structured self-assessment skill for Claude Code users -- 5/5/5 report with evidence-backed findings",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "keywords": ["feedback", "self-assessment", "productivity"],
       "category": "productivity"
     }

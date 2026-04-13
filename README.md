@@ -11,8 +11,21 @@ The skill tracks trends across sessions, so the second run is more useful than t
 ### Install
 
 ```bash
-claude plugin add bwitlin/claude-skills
+# Add the marketplace and install the plugin
+claude plugin marketplace add bwitlin/claude-skills
+claude plugin install feedback@bwitlin-claude-skills
 ```
+
+<details>
+<summary>Manual install (alternative)</summary>
+
+```bash
+git clone https://github.com/bwitlin/claude-skills.git ~/.claude/local-plugins/claude-skills
+mkdir -p ~/.claude/skills && ln -sf ~/.claude/local-plugins/claude-skills/skills/feedback ~/.claude/skills/feedback
+```
+</details>
+
+> **Note:** The skill won't appear until your next Claude Code session. If `/feedback` doesn't work immediately, restart Claude Code.
 
 ### Usage
 

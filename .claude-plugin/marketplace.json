@@ -4,24 +4,32 @@
     "name": "Brian Witlin"
   },
   "metadata": {
-    "version": "1.0.1"
+    "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "feedback",
-      "source": ".",
-      "description": "Structured self-assessment skill for Claude Code users -- 5/5/5 report with evidence-backed findings",
+      "source": "./plugins/feedback",
+      "description": "Structured self-assessment skill for Claude Code -- 5/5/5 report with evidence-backed findings and trend tracking",
       "version": "1.0.1",
-      "keywords": ["feedback", "self-assessment", "productivity"],
+      "keywords": ["feedback", "self-assessment", "productivity", "trend-tracking"],
       "category": "productivity"
     },
     {
       "name": "skill-battle",
-      "source": ".",
+      "source": "./plugins/skill-battle",
       "description": "Run multiple skills on the same task in parallel and compare outputs side by side",
       "version": "1.0.0",
       "keywords": ["skill-battle", "compare", "split-test", "creative", "pitch-room", "A/B"],
       "category": "productivity"
+    },
+    {
+      "name": "eli5",
+      "source": "./plugins/eli5",
+      "description": "Explain any concept as a self-contained HTML page with analogies, CSS diagrams, and curated links",
+      "version": "1.0.0",
+      "keywords": ["eli5", "explain", "teaching", "learning", "analogy", "visualization"],
+      "category": "education"
     }
   ]
 }

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELI5: Photosynthesis</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    line-height: 1.7;
+  }
+  .hero {
+    background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);
+    padding: 60px 40px 40px;
+    text-align: center;
+    border-bottom: 1px solid #1e293b;
+  }
+  .hero .label {
+    display: inline-block;
+    background: #22c55e;
+    color: #052e16;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .hero h1 { font-size: 2.8em; font-weight: 800; color: #f8fafc; margin-bottom: 12px; line-height: 1.2; }
+  .hero .oneliner { font-size: 1.25em; color: #94a3b8; max-width: 700px; margin: 0 auto; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px; }
+  section { padding: 50px 0; }
+  section + section { border-top: 1px solid #1e293b; }
+  h2 { font-size: 1.5em; font-weight: 700; color: #f8fafc; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  h2 .icon { font-size: 1.2em; }
+  p { color: #cbd5e1; margin-bottom: 16px; font-size: 1.05em; }
+  strong { color: #f8fafc; }
+
+  .analogy-card {
+    background: linear-gradient(135deg, #052e16 0%, #14532d 100%);
+    border: 1px solid #166534;
+    border-radius: 16px;
+    padding: 32px;
+    margin: 20px 0;
+  }
+  .analogy-card p { color: #bbf7d0; font-size: 1.1em; line-height: 1.8; }
+  .analogy-card strong { color: #dcfce7; }
+
+  .boundary {
+    background: #1e293b;
+    border-left: 4px solid #f59e0b;
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .boundary-label { font-size: 0.8em; font-weight: 700; color: #f59e0b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .boundary p { color: #94a3b8; font-size: 0.95em; margin: 0; }
+
+  .diagram-section {
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 40px 24px;
+    margin: 30px 0;
+    overflow-x: auto;
+  }
+  .diagram-title {
+    font-size: 0.85em; font-weight: 600; color: #64748b;
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 24px; text-align: center;
+  }
+
+  /* --- The Factory Diagram --- */
+  .factory {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    max-width: 780px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+
+  /* Input column */
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
+    min-width: 140px;
+  }
+  .input-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .input-icon { font-size: 1.8em; }
+  .input-label {
+    background: #1d4ed8;
+    color: #dbeafe;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-align: center;
+    min-width: 110px;
+  }
+
+  /* Arrow into factory */
+  .arrow-in {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+  }
+  .arrow-in span { color: #475569; font-size: 2em; }
+
+  /* The factory (leaf) */
+  .the-leaf {
+    background: linear-gradient(135deg, #14532d 0%, #166534 100%);
+    border: 3px solid #22c55e;
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+    min-width: 180px;
+    position: relative;
+  }
+  .the-leaf .leaf-icon { font-size: 2.4em; margin-bottom: 6px; }
+  .the-leaf .leaf-title { font-weight: 800; color: #dcfce7; font-size: 1.1em; }
+  .the-leaf .leaf-sub { color: #86efac; font-size: 0.8em; margin-top: 4px; }
+  .the-leaf .leaf-process {
+    margin-top: 12px;
+    background: rgba(0,0,0,0.25);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 0.78em;
+    color: #bbf7d0;
+    line-height: 1.5;
+  }
+
+  /* Arrow out of factory */
+  .arrow-out {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+  }
+  .arrow-out span { color: #475569; font-size: 2em; }
+
+  /* Output column */
+  .outputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    min-width: 140px;
+  }
+  .output-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .output-label {
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-align: center;
+    min-width: 110px;
+  }
+  .output-label.sugar { background: #d97706; color: #fef3c7; }
+  .output-label.oxygen { background: #059669; color: #d1fae5; }
+  .output-icon { font-size: 1.8em; }
+
+  /* --- Equation bar --- */
+  .equation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 30px;
+    padding: 16px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 12px;
+    flex-wrap: wrap;
+  }
+  .eq-item {
+    text-align: center;
+  }
+  .eq-item .eq-icon { font-size: 1.5em; }
+  .eq-item .eq-name { font-size: 0.75em; color: #94a3b8; }
+  .eq-plus { color: #64748b; font-size: 1.4em; font-weight: 700; }
+  .eq-arrow { color: #22c55e; font-size: 1.4em; font-weight: 700; }
+
+  /* --- Where it happens --- */
+  .where-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .zoom-box {
+    text-align: center;
+    padding: 16px;
+    min-width: 120px;
+  }
+  .zoom-box .z-icon { font-size: 2.2em; }
+  .zoom-box .z-label { font-weight: 700; color: #f8fafc; font-size: 0.9em; margin-top: 4px; }
+  .zoom-box .z-desc { color: #94a3b8; font-size: 0.78em; margin-top: 2px; }
+  .zoom-arrow { color: #475569; font-size: 1.5em; padding: 0 4px; }
+  .zoom-box.chloroplast {
+    background: #14532d;
+    border: 2px solid #22c55e;
+    border-radius: 14px;
+    padding: 18px;
+  }
+
+  .detail-block { margin-bottom: 28px; }
+  .detail-block h3 { font-size: 1.1em; color: #f8fafc; margin-bottom: 8px; }
+
+  .misconception {
+    background: linear-gradient(135deg, #451a03 0%, #78350f 100%);
+    border: 1px solid #92400e;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+  }
+  .misconception-label { font-size: 0.8em; font-weight: 700; color: #fbbf24; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .misconception p { color: #fcd34d; margin: 0; }
+
+  .link-card {
+    display: block;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .link-card:hover { border-color: #22c55e; transform: translateY(-2px); }
+  .link-card .link-title { font-weight: 700; color: #86efac; font-size: 1em; }
+  .link-card .link-desc { color: #94a3b8; font-size: 0.9em; margin-top: 4px; }
+
+  .footer {
+    text-align: center; padding: 40px; color: #475569; font-size: 0.85em; border-top: 1px solid #1e293b;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="label">ELI5</div>
+  <h1>Photosynthesis</h1>
+  <p class="oneliner">Plants eat sunlight. They take in light, water, and air, and turn it into food (sugar) for themselves — and oxygen for us as a free bonus.</p>
+</div>
+
+<div class="container">
+
+<!-- THE ANALOGY -->
+<section>
+  <h2><span class="icon">💡</span> The Analogy</h2>
+  <div class="analogy-card">
+    <p>Imagine a tiny factory inside every leaf. This factory has <strong>solar panels on the roof</strong> (the green parts called chlorophyll) that capture energy from the sun. Through pipes in the walls, the factory receives two raw materials: <strong>water</strong> pumped up from the roots through the stem, and <strong>carbon dioxide</strong> — a gas that drifts in through tiny pores on the leaf's surface (like little breathing holes called stomata).</p>
+    <p>Inside the factory, the solar energy powers a machine that <strong>rips apart the water molecules</strong> and <strong>rearranges the atoms</strong> from water and CO₂ into something new: <strong>sugar</strong> — the plant's food. It's like building LEGO: you take apart one set (water + CO₂) and snap the pieces together into a completely different creation (sugar). The leftover oxygen atoms? They get pushed out through those same breathing holes — which is the air we breathe.</p>
+  </div>
+  <div class="boundary">
+    <div class="boundary-label">Where this analogy breaks down</div>
+    <p>A real factory runs on electricity from a power grid. A leaf's "factory" generates its own power from sunlight in real-time — it can't store electricity for later the way a battery can. Also, the "rearranging atoms" step isn't one simple machine — it's a chain of dozens of chemical reactions happening in sequence, more like an assembly line than a single device.</p>
+  </div>
+</section>
+
+<!-- THE VISUAL -->
+<section>
+  <h2><span class="icon">🎨</span> The Visual</h2>
+
+  <div class="diagram-section">
+    <div class="diagram-title">The leaf factory: inputs → process → outputs</div>
+
+    <div class="factory">
+      <div class="inputs">
+        <div class="input-item">
+          <span class="input-icon">☀️</span>
+          <div class="input-label">Sunlight<br><small style="opacity:0.7">energy source</small></div>
+        </div>
+        <div class="input-item">
+          <span class="input-icon">💧</span>
+          <div class="input-label">Water (H₂O)<br><small style="opacity:0.7">from roots</small></div>
+        </div>
+        <div class="input-item">
+          <span class="input-icon">🌫️</span>
+          <div class="input-label">CO₂<br><small style="opacity:0.7">from the air</small></div>
+        </div>
+      </div>
+
+      <div class="arrow-in"><span>→</span></div>
+
+      <div class="the-leaf">
+        <div class="leaf-icon">🍃</div>
+        <div class="leaf-title">The Leaf</div>
+        <div class="leaf-sub">chloroplasts inside cells</div>
+        <div class="leaf-process">
+          Solar energy splits water apart.<br>
+          Atoms rearrange with CO₂.<br>
+          New molecules are built.
+        </div>
+      </div>
+
+      <div class="arrow-out"><span>→</span></div>
+
+      <div class="outputs">
+        <div class="output-item">
+          <div class="output-label sugar">Sugar (C₆H₁₂O₆)<br><small style="opacity:0.7">plant's food</small></div>
+          <span class="output-icon">🍬</span>
+        </div>
+        <div class="output-item">
+          <div class="output-label oxygen">Oxygen (O₂)<br><small style="opacity:0.7">we breathe this</small></div>
+          <span class="output-icon">🫁</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- The equation -->
+    <div class="equation">
+      <div class="eq-item"><div class="eq-icon">☀️</div><div class="eq-name">Sunlight</div></div>
+      <div class="eq-plus">+</div>
+      <div class="eq-item"><div class="eq-icon">💧</div><div class="eq-name">6 H₂O</div></div>
+      <div class="eq-plus">+</div>
+      <div class="eq-item"><div class="eq-icon">🌫️</div><div class="eq-name">6 CO₂</div></div>
+      <div class="eq-arrow">→</div>
+      <div class="eq-item"><div class="eq-icon">🍬</div><div class="eq-name">C₆H₁₂O₆</div></div>
+      <div class="eq-plus">+</div>
+      <div class="eq-item"><div class="eq-icon">🫁</div><div class="eq-name">6 O₂</div></div>
+    </div>
+  </div>
+
+  <div class="diagram-section">
+    <div class="diagram-title">Where it actually happens: zoom in on a leaf</div>
+    <div class="where-diagram">
+      <div class="zoom-box">
+        <div class="z-icon">🌳</div>
+        <div class="z-label">Tree</div>
+      </div>
+      <span class="zoom-arrow">→</span>
+      <div class="zoom-box">
+        <div class="z-icon">🍃</div>
+        <div class="z-label">Leaf</div>
+        <div class="z-desc">millions of cells</div>
+      </div>
+      <span class="zoom-arrow">→</span>
+      <div class="zoom-box">
+        <div class="z-icon">🔬</div>
+        <div class="z-label">Cell</div>
+        <div class="z-desc">has ~50 chloroplasts</div>
+      </div>
+      <span class="zoom-arrow">→</span>
+      <div class="zoom-box chloroplast">
+        <div class="z-icon">💚</div>
+        <div class="z-label">Chloroplast</div>
+        <div class="z-desc">the actual factory</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- A BIT MORE DETAIL -->
+<section>
+  <h2><span class="icon">📖</span> A Bit More Detail</h2>
+
+  <div class="detail-block">
+    <h3>Why are plants green?</h3>
+    <p>The "solar panels" in the factory analogy are molecules of <strong>chlorophyll</strong> — a pigment that absorbs red and blue light but bounces green light back to your eyes. That's it — plants are green because green is the color of sunlight they <em>don't</em> use. They're actually using the rest of the rainbow.</p>
+  </div>
+
+  <div class="detail-block">
+    <h3>The two-shift factory</h3>
+    <p>Photosynthesis actually runs in two stages — think of it as a day shift and a second shift. The <strong>day shift</strong> (light-dependent reactions) can only happen when the sun is shining. It splits water, captures the energy, and produces oxygen as a byproduct. The <strong>second shift</strong> (the Calvin cycle) takes the energy captured by the day shift and uses it to assemble CO₂ into sugar. Despite its name, the second shift can technically run without light — it just needs the energy the day shift produced.</p>
+  </div>
+
+  <div class="detail-block">
+    <h3>Why this matters for all of us</h3>
+    <p>Almost all food on Earth traces back to photosynthesis. Plants make sugar from sunlight. Animals eat plants. Other animals eat those animals. The energy flowing through every food chain started as sunlight hitting a leaf. Meanwhile, the oxygen we breathe is literally a waste product of this process — plants don't "want" to make oxygen, it's just leftover hydrogen from the water molecules they cracked open.</p>
+  </div>
+
+  <div class="misconception">
+    <div class="misconception-label">The part that trips people up</div>
+    <p>Most people think plants "breathe in" CO₂ and "breathe out" O₂ — as if they're the opposite of animals. The truth is plants do BOTH. They photosynthesize (using CO₂, releasing O₂) AND they respire (using O₂, releasing CO₂) — just like we do. During the day, photosynthesis produces more O₂ than respiration uses, so the net effect is oxygen out. At night, with no sunlight, they only respire — they're quietly consuming oxygen just like you are.</p>
+  </div>
+</section>
+
+<!-- GO DEEPER -->
+<section>
+  <h2><span class="icon">🔗</span> Go Deeper</h2>
+
+  <a class="link-card" href="https://media.hhmi.org/biointeractive/click/photosynthesis/" target="_blank">
+    <div class="link-title">HHMI BioInteractive: Photosynthesis (Interactive Animation)</div>
+    <div class="link-desc">A gorgeous animated walkthrough that zooms inside a leaf, into a cell, into a chloroplast — and shows each step of the process happening in real time. The best visual explanation out there.</div>
+  </a>
+
+  <a class="link-card" href="https://www.khanacademy.org/science/ap-biology/cellular-energetics/photosynthesis/v/photosynthesis" target="_blank">
+    <div class="link-title">Khan Academy: Photosynthesis</div>
+    <div class="link-desc">A clear, paced video explanation that builds from the basics to the full chemical equation. Great if you want to go one level deeper than this page without jumping to a textbook.</div>
+  </a>
+
+  <a class="link-card" href="https://education.nationalgeographic.org/resource/photosynthesis/" target="_blank">
+    <div class="link-title">National Geographic: Photosynthesis</div>
+    <div class="link-desc">A well-illustrated article that connects photosynthesis to the bigger picture — ecosystems, food chains, and why life on Earth depends on this single chemical process.</div>
+  </a>
+</section>
+
+</div>
+
+<div class="footer">
+  Generated by the ELI5 skill &bull; Explain Like I'm Five, for grown-ups
+</div>
+
+</body>
+</html>

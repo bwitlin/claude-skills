@@ -1,0 +1,5 @@
+{
+  "name": "feedback",
+  "description": "Structured self-assessment skill for Claude Code -- 5/5/5 report with evidence-backed findings and trend tracking",
+  "version": "1.0.1"
+}

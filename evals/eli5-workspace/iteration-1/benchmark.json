@@ -1,0 +1,196 @@
+{
+  "metadata": {
+    "skill_name": "eli5",
+    "skill_path": "/Users/brianwitlin/Documents/open-source/claude-skills/skills/eli5",
+    "executor_model": "claude-opus-4-6",
+    "timestamp": "2026-04-14T00:00:00Z",
+    "evals_run": [0, 1, 2],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "eval_name": "blockchain-eli5",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 236.8,
+        "tokens": 105267,
+        "tool_calls": 23,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Contains a concrete analogy using familiar real-world concepts", "passed": true, "evidence": "Twenty friends keeping identical copies of a notebook with permanent ink."},
+        {"text": "Explicitly states where the analogy breaks down", "passed": true, "evidence": "Dedicated paragraph about proof of work/stake vs. room vote."},
+        {"text": "Includes a visual", "passed": true, "evidence": "Mermaid flowchart inline plus tldraw code saved."},
+        {"text": "Visual teaches something text alone does not", "passed": true, "evidence": "Three-view diagram: flow, chain linkage, and properties."},
+        {"text": "Has layered structure", "passed": true, "evidence": "One-Liner → Analogy → Visual → Detail → Go Deeper."},
+        {"text": "Includes curated external links", "passed": true, "evidence": "3 links with descriptions."},
+        {"text": "Technical terms tied to familiar concepts first", "passed": true, "evidence": "'hash' as 'mathematical fingerprint', 'consensus' as 'agreement'."},
+        {"text": "Respects 4-item chunk limit", "passed": true, "evidence": "Detail broken into 3 focused sub-sections."}
+      ]
+    },
+    {
+      "eval_id": 0,
+      "eval_name": "blockchain-eli5",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.375,
+        "passed": 3,
+        "failed": 5,
+        "total": 8,
+        "time_seconds": 31.7,
+        "tokens": 70878,
+        "tool_calls": 2,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Contains a concrete analogy using familiar real-world concepts", "passed": true, "evidence": "Pokemon card trading notebook analogy."},
+        {"text": "Explicitly states where the analogy breaks down", "passed": false, "evidence": "No mention of analogy limitations."},
+        {"text": "Includes a visual", "passed": false, "evidence": "No visual of any kind."},
+        {"text": "Visual teaches something text alone does not", "passed": false, "evidence": "No visual produced."},
+        {"text": "Has layered structure", "passed": false, "evidence": "No one-liner, jumps from analogy to reasons."},
+        {"text": "Includes curated external links", "passed": false, "evidence": "No links included."},
+        {"text": "Technical terms tied to familiar concepts first", "passed": true, "evidence": "Smart contracts explained with sports bet example."},
+        {"text": "Respects 4-item chunk limit", "passed": true, "evidence": "Each reason section focuses on one concept."}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "async-await-code",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 299.2,
+        "tokens": 94983,
+        "tool_calls": 20,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Contains a concrete analogy", "passed": true, "evidence": "Coffee shop ordering analogy."},
+        {"text": "Explicitly states where the analogy breaks down", "passed": true, "evidence": "Paragraph about physically waiting vs. non-blocking."},
+        {"text": "Includes a visual", "passed": true, "evidence": "Mermaid flowchart with colored nodes."},
+        {"text": "Visual teaches something text alone does not", "passed": true, "evidence": "Branching success/error paths shown visually."},
+        {"text": "Has layered structure", "passed": true, "evidence": "One-Liner → Analogy → Visual → Code walkthrough → Go Deeper."},
+        {"text": "Includes curated external links", "passed": true, "evidence": "4 links with descriptions."},
+        {"text": "Technical terms tied to familiar concepts first", "passed": true, "evidence": "Promise = barista's promise, await = stepping aside."},
+        {"text": "Respects 4-item chunk limit", "passed": true, "evidence": "One concept per code block."},
+        {"text": "References the specific code snippet", "passed": true, "evidence": "Full line-by-line walkthrough of fetchUserData."}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "async-await-code",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.444,
+        "passed": 4,
+        "failed": 5,
+        "total": 9,
+        "time_seconds": 37.1,
+        "tokens": 71285,
+        "tool_calls": 2,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Contains a concrete analogy", "passed": true, "evidence": "Restaurant/delivery app analogy."},
+        {"text": "Explicitly states where the analogy breaks down", "passed": false, "evidence": "No analogy limitations mentioned."},
+        {"text": "Includes a visual", "passed": false, "evidence": "No visual."},
+        {"text": "Visual teaches something text alone does not", "passed": false, "evidence": "No visual."},
+        {"text": "Has layered structure", "passed": false, "evidence": "Bounces between analogy and detail."},
+        {"text": "Includes curated external links", "passed": false, "evidence": "No links."},
+        {"text": "Technical terms tied to familiar concepts first", "passed": true, "evidence": "async explained as a sign, await as pause me."},
+        {"text": "Respects 4-item chunk limit", "passed": true, "evidence": "Line-by-line, one concept each."},
+        {"text": "References the specific code snippet", "passed": true, "evidence": "Full line-by-line walkthrough."}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "machine-learning-broad",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 231.7,
+        "tokens": 89287,
+        "tool_calls": 17,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Contains a concrete analogy", "passed": true, "evidence": "Toddler recognizing animals analogy."},
+        {"text": "Explicitly states where the analogy breaks down", "passed": true, "evidence": "ML model lacks common sense beyond training data."},
+        {"text": "Includes a visual", "passed": true, "evidence": "Mermaid flowchart of training loop."},
+        {"text": "Visual teaches something text alone does not", "passed": true, "evidence": "Circular loop structure makes iteration visually obvious."},
+        {"text": "Has layered structure", "passed": true, "evidence": "One-Liner → Analogy → Visual → Detail → Go Deeper."},
+        {"text": "Includes curated external links", "passed": true, "evidence": "4 links with descriptions."},
+        {"text": "Technical terms tied to familiar concepts first", "passed": true, "evidence": "parameters = adjustable knobs, training = guess-check-adjust."},
+        {"text": "Respects 4-item chunk limit", "passed": true, "evidence": "3 concepts in detail section, one per paragraph."},
+        {"text": "Acknowledges complexity", "passed": true, "evidence": "ML vs AI distinction, defers gradient descent."}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "machine-learning-broad",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.333,
+        "passed": 3,
+        "failed": 6,
+        "total": 9,
+        "time_seconds": 52.9,
+        "tokens": 71886,
+        "tool_calls": 5,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Contains a concrete analogy", "passed": true, "evidence": "Puppy learning tricks analogy."},
+        {"text": "Explicitly states where the analogy breaks down", "passed": false, "evidence": "No limitations mentioned."},
+        {"text": "Includes a visual", "passed": false, "evidence": "No visual."},
+        {"text": "Visual teaches something text alone does not", "passed": false, "evidence": "No visual."},
+        {"text": "Has layered structure", "passed": false, "evidence": "One-sentence summary at END not beginning. No progression."},
+        {"text": "Includes curated external links", "passed": false, "evidence": "No links."},
+        {"text": "Technical terms tied to familiar concepts first", "passed": true, "evidence": "Supervised = flashcards, unsupervised = sorting Legos."},
+        {"text": "Respects 4-item chunk limit", "passed": true, "evidence": "3 types, each with own item."},
+        {"text": "Acknowledges complexity", "passed": false, "evidence": "Presents everything as straightforward."}
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0},
+      "time_seconds": {"mean": 255.9, "stddev": 36.4, "min": 231.7, "max": 299.2},
+      "tokens": {"mean": 96512, "stddev": 8140, "min": 89287, "max": 105267}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.384, "stddev": 0.056, "min": 0.333, "max": 0.444},
+      "time_seconds": {"mean": 40.6, "stddev": 11.0, "min": 31.7, "max": 52.9},
+      "tokens": {"mean": 71350, "stddev": 504, "min": 70878, "max": 71886}
+    },
+    "delta": {
+      "pass_rate": "+0.616",
+      "time_seconds": "+215.3",
+      "tokens": "+25162"
+    }
+  },
+  "notes": [
+    "With-skill achieves 100% pass rate across all 3 evals vs. 38% baseline — skill is strongly differentiating",
+    "Baseline consistently passes 'has analogy', 'jargon-free terms', and 'chunk limit' — these 3 assertions are non-discriminating (Claude does them naturally)",
+    "Baseline consistently fails 'visual', 'analogy boundary', 'curated links', 'layered structure' — these are the skill's main value-add",
+    "Skill adds ~215s average execution time (4-6x slower) and ~25k tokens — the cost is real but explained by web search + visual generation",
+    "tldraw MCP timed out in all 3 with-skill runs; skill fell back to Mermaid diagrams. tldraw code was saved but not rendered."
+  ]
+}

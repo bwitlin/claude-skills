@@ -1,0 +1,5 @@
+{
+  "name": "skill-battle",
+  "description": "Run multiple skills on the same task in parallel and compare outputs side by side",
+  "version": "1.0.0"
+}

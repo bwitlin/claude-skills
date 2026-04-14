@@ -1,6 +1,48 @@
 # claude-skills
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Skills: 3](https://img.shields.io/badge/Skills-3-purple.svg)](#skills)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-compatible-green.svg)](https://docs.anthropic.com/en/docs/claude-code)
+
 Claude Code skills by Brian Witlin.
+
+## Skills
+
+| Skill | Description |
+|-------|-------------|
+| [`/feedback`](#feedback) | Structured 5/5/5 self-assessment with evidence and trend tracking |
+| [`/skill-battle`](#skill-battle) | Run multiple skills on the same task in parallel, compare side by side |
+| [`/eli5`](#eli5) | Explain any concept as a self-contained HTML page with analogies and visuals |
+
+## Install
+
+```bash
+# Add the marketplace
+claude plugin marketplace add bwitlin/claude-skills
+
+# Install individual skills
+claude plugin install feedback@bwitlin-claude-skills
+claude plugin install skill-battle@bwitlin-claude-skills
+claude plugin install eli5@bwitlin-claude-skills
+```
+
+<details>
+<summary>Manual install (alternative)</summary>
+
+```bash
+git clone https://github.com/bwitlin/claude-skills.git ~/.claude/local-plugins/claude-skills
+mkdir -p ~/.claude/skills
+
+# Link whichever skills you want
+ln -sf ~/.claude/local-plugins/claude-skills/plugins/feedback/skills/feedback ~/.claude/skills/feedback
+ln -sf ~/.claude/local-plugins/claude-skills/plugins/skill-battle/skills/skill-battle ~/.claude/skills/skill-battle
+ln -sf ~/.claude/local-plugins/claude-skills/plugins/eli5/skills/eli5 ~/.claude/skills/eli5
+```
+</details>
+
+> **Note:** Skills won't appear until your next Claude Code session. If a slash command doesn't work immediately, restart Claude Code.
+
+---
 
 ## /feedback
 
@@ -18,25 +60,6 @@ Over 7 feedback sessions on a real workspace:
 - **One session resolved all 5 recommendations in a single sitting** -- TASKS.md rewrite, file commits, scheduled task adjustment, stale index archived, full memory sweep with 6 rule promotions. The skill generated real work output, not just a report to read and forget.
 
 The skill distinguishes between **literacy gaps** (you don't know a tool exists) and **discipline gaps** (you know but didn't use it). Literacy gaps get teaching. Discipline gaps get automation. Different problems, different fixes. Getting this wrong wastes time -- repeating instructions to someone who already knows, or building guardrails when someone just needs a walkthrough.
-
-### Install
-
-```bash
-# Add the marketplace and install the plugin
-claude plugin marketplace add bwitlin/claude-skills
-claude plugin install feedback@bwitlin-claude-skills
-```
-
-<details>
-<summary>Manual install (alternative)</summary>
-
-```bash
-git clone https://github.com/bwitlin/claude-skills.git ~/.claude/local-plugins/claude-skills
-mkdir -p ~/.claude/skills && ln -sf ~/.claude/local-plugins/claude-skills/skills/feedback ~/.claude/skills/feedback
-```
-</details>
-
-> **Note:** The skill won't appear until your next Claude Code session. If `/feedback` doesn't work immediately, restart Claude Code.
 
 ### Usage
 
@@ -78,6 +101,8 @@ The fresh documentation feature requires the Context7 MCP server. Without it, th
 - **Context7 MCP** -- Powers fresh documentation lookup. The skill queries current Claude Code docs before writing recommendations so it catches new features you might not know about. Install from [context7.com](https://context7.com).
 - **gstack** -- If installed (`~/.gstack/`), the skill also scans checkpoint history and skill changelog for additional evidence. Install from [github.com/garrytan/gstack](https://github.com/garrytan/gstack).
 
+---
+
 ## /skill-battle
 
 A creative pitch room for Claude Code. Give it a task, and it finds multiple skills -- yours and ones from trusted community repos -- to tackle it independently in parallel. You compare outputs side by side and pick the best parts.
@@ -85,25 +110,6 @@ A creative pitch room for Claude Code. Give it a task, and it finds multiple ski
 Think of it like briefing three different agencies on the same project. You get three different takes. You decide what ships.
 
 Also useful for **split testing** -- generate multiple variants of headlines, email copy, or ad creative, then plug the best ones into your testing tool.
-
-### Install
-
-```bash
-# Add the marketplace and install the plugin
-claude plugin marketplace add bwitlin/claude-skills
-claude plugin install skill-battle@bwitlin-claude-skills
-```
-
-<details>
-<summary>Manual install (alternative)</summary>
-
-```bash
-git clone https://github.com/bwitlin/claude-skills.git ~/.claude/local-plugins/claude-skills
-mkdir -p ~/.claude/skills && ln -sf ~/.claude/local-plugins/claude-skills/skills/skill-battle ~/.claude/skills/skill-battle
-```
-</details>
-
-> **Note:** The skill won't appear until your next Claude Code session. If `/skill-battle` doesn't work immediately, restart Claude Code.
 
 ### Usage
 
@@ -141,6 +147,8 @@ Skill-battle is fun and it works. Here are the things worth knowing before you g
 - `gh` CLI for external skill trust assessment -- [install here](https://cli.github.com/)
 - Subagent support (for parallel execution)
 
+---
+
 ## /eli5
 
 Explain Like I'm Five -- but not literally. This skill takes any concept and produces a single, self-contained HTML page that breaks it down with a concrete analogy, embedded CSS diagrams, layered detail, and curated links to go deeper. It opens in your browser. One page, everything together.
@@ -149,24 +157,18 @@ The teaching approach is grounded in real pedagogy -- cognitive load theory (nev
 
 It's not for children. It's for adults who want the intuition -- the "ohh, that makes sense" moment -- without wading through a textbook first.
 
-### Install
+### Example outputs
 
-```bash
-# Add the marketplace and install the plugin
-claude plugin marketplace add bwitlin/claude-skills
-claude plugin install eli5@bwitlin-claude-skills
-```
-
-<details>
-<summary>Manual install (alternative)</summary>
-
-```bash
-git clone https://github.com/bwitlin/claude-skills.git ~/.claude/local-plugins/claude-skills
-mkdir -p ~/.claude/skills && ln -sf ~/.claude/local-plugins/claude-skills/skills/eli5 ~/.claude/skills/eli5
-```
-</details>
-
-> **Note:** The skill won't appear until your next Claude Code session. If `/eli5` doesn't work immediately, restart Claude Code.
+<table>
+<tr>
+<td align="center"><strong>Photosynthesis</strong></td>
+<td align="center"><strong>The Singularity</strong></td>
+</tr>
+<tr>
+<td><a href="examples/eli5-photosynthesis.html"><img src="assets/eli5-photosynthesis.png" width="400" alt="ELI5: Photosynthesis"></a></td>
+<td><a href="examples/eli5-singularity.html"><img src="assets/eli5-singularity.png" width="400" alt="ELI5: The Singularity"></a></td>
+</tr>
+</table>
 
 ### Usage
 

@@ -1,0 +1,15 @@
+{
+  "eval_id": 0,
+  "eval_name": "blockchain-eli5",
+  "prompt": "ELI5 what is a blockchain and why do people care about it",
+  "assertions": [
+    {"text": "Contains a concrete analogy using familiar real-world concepts (not just technical metaphors)", "type": "qualitative"},
+    {"text": "Explicitly states where the analogy breaks down or stops working", "type": "qualitative"},
+    {"text": "Includes a visual (tldraw canvas, Mermaid diagram, or structured visual format)", "type": "binary"},
+    {"text": "The visual teaches something the text alone does not (not just restating words as shapes)", "type": "qualitative"},
+    {"text": "Has layered structure progressing from simple to detailed (one-liner -> analogy -> detail)", "type": "qualitative"},
+    {"text": "Includes curated external links with descriptions of why each is worth clicking", "type": "binary"},
+    {"text": "Technical terms are introduced only after being tied to the analogy or a familiar concept", "type": "qualitative"},
+    {"text": "No single section introduces more than 4 new concepts before consolidating", "type": "qualitative"}
+  ]
+}

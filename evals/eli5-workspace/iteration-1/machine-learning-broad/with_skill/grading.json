@@ -1,0 +1,15 @@
+{
+  "expectations": [
+    {"text": "Contains a concrete analogy using familiar real-world concepts", "passed": true, "evidence": "Teaching a toddler to recognize animals — pointing, correcting, pattern learning. Universally familiar."},
+    {"text": "Explicitly states where the analogy breaks down", "passed": true, "evidence": "'Where this analogy breaks down: A toddler builds rich, flexible understanding... A machine learning model knows none of that. It only learns the narrow pattern you train it on.'"},
+    {"text": "Includes a visual (tldraw, Mermaid, or structured)", "passed": true, "evidence": "Mermaid flowchart showing the training feedback loop (Data → Model → Guess → Compare → Adjust → repeat)."},
+    {"text": "The visual teaches something the text alone does not", "passed": true, "evidence": "The circular loop structure (adjust feeds back into model) makes the iterative nature visually obvious in a way the linear text doesn't convey."},
+    {"text": "Has layered structure (one-liner -> analogy -> detail)", "passed": true, "evidence": "One-Liner → Analogy → Visual → 'A Bit More Detail' (training, parameters, ML vs. traditional) → Go Deeper."},
+    {"text": "Includes curated external links with descriptions", "passed": true, "evidence": "Four links: 3Blue1Brown neural network video, Google Teachable Machine, TF Playground, Coursera roadmap — each with why-click sentence."},
+    {"text": "Technical terms introduced only after being tied to familiar concept", "passed": true, "evidence": "'training' = guess-check-adjust cycle, 'parameters' = adjustable knobs, 'gradient descent' mentioned but deferred. Each term anchored to analogy first."},
+    {"text": "No single section introduces more than 4 new concepts", "passed": true, "evidence": "Detail section introduces training, then parameters/weights, then traditional vs. ML. Three concepts, each with its own paragraph."},
+    {"text": "Acknowledges that machine learning is genuinely complex/broad", "passed": true, "evidence": "'People often confuse machine learning with artificial intelligence. Machine learning is one technique within the broader field of AI.' Also: 'that's a topic for another day' re: gradient descent."}
+  ],
+  "summary": {"passed": 9, "failed": 0, "total": 9, "pass_rate": 1.0},
+  "timing": {"total_duration_seconds": 231.7, "total_tokens": 89287}
+}

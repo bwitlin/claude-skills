@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2026-04-14
+
+### Added
+- `confidence-signaling` rule -- explicit "I know" / "I think" / "I'm not sure" labels with evidence strength grading
+- `execution-mode` rule -- action-first mode during workflows with frustration detection and walk-away tags
+
 ## [1.2.0] - 2026-04-14
 
 ### Added

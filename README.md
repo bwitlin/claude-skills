@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Skills: 3](https://img.shields.io/badge/Skills-3-purple.svg)](#skills)
-[![Rules: 4](https://img.shields.io/badge/Rules-4-orange.svg)](#rules)
+[![Rules: 6](https://img.shields.io/badge/Rules-6-orange.svg)](#rules)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-compatible-green.svg)](https://docs.anthropic.com/en/docs/claude-code)
 
 Claude Code skills and rules for self-improving workflows -- feedback loops, learning tools, and creative comparison.
@@ -23,6 +23,8 @@ Claude Code skills and rules for self-improving workflows -- feedback loops, lea
 | [`anti-sycophancy`](#anti-sycophancy) | Prevents Claude from flipping positions when challenged -- defend or explain what changed |
 | [`skill-dispatch-protocol`](#skill-dispatch-protocol) | Three-tier routing for skill invocation: auto-invoke, present options, or confirm destructive |
 | [`secret-file-protection`](#secret-file-protection) | Blocks reading .env, credentials, keys, and shell config files that contain secrets |
+| [`confidence-signaling`](#confidence-signaling) | Adds explicit "I know" / "I think" / "I'm not sure" labels so you know what to trust |
+| [`execution-mode`](#execution-mode) | Switches Claude to action-first mode during workflows -- one action per response, no lectures |
 
 > Rules are not yet distributable via the plugin system ([tracking issue](https://github.com/anthropics/claude-code/issues/14200)). Install manually for now.
 
@@ -284,6 +286,18 @@ A security rule that prevents Claude from reading files that commonly contain se
 This is different from `.gitignore`. `.gitignore` prevents secrets from being committed. This rule prevents secrets from being *read into the conversation* -- once a secret enters the context window, it persists for the session. Different risk, different solution.
 
 For guaranteed enforcement, implement this as a [PreToolUse hook](https://docs.anthropic.com/en/docs/claude-code/hooks) that hard-blocks reads. The rule provides the logic; a hook provides the enforcement.
+
+## confidence-signaling
+
+A transparency rule that adds explicit confidence labels to recommendations. Claude uses three markers -- "I know" (verified fact), "I think" (likely but unverified), and "I'm not sure" (meaningful uncertainty) -- so you always know which claims to trust and which to verify before acting.
+
+Also includes an evidence-grading system: **Strong** (official docs, direct tests), **Medium** (best practices, community consensus), **Weak** (anecdote, intuition). Never presents weak evidence as fact.
+
+## execution-mode
+
+A workflow rule that switches Claude into action-first mode during multi-step tasks. One action per response, no lectures, no education -- just the next thing to do. Includes frustration detection (shorter, more emphatic user responses trigger simpler Claude responses) and walk-away tags for long-running processes.
+
+Exploring a concept? Claude teaches. Deploying to production? Claude executes. This rule makes Claude match your mode instead of defaulting to verbose explanations during every interaction.
 
 ## Author
 

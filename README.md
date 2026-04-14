@@ -250,6 +250,10 @@ When no skill is active, it shows `> Claude`.
 
 Useful during long sessions where multiple skills or workflows are used. You always know what mode Claude is operating in.
 
+## Author
+
+Built by [Brian Witlin](https://linkedin.com/in/brianwitlin/) -- 17 years in AI, zero years as an engineer. Making Claude Code easier for everyone else screaming `'why don't you just ${expletive} work?!'` at their terminal.
+
 ## License
 
 MIT

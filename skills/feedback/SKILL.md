@@ -54,20 +54,47 @@ git log --format="%h %ai %s" --since="<window_start>" | grep -E " 0[0-5]:" || ec
 
 ### 1.2 Checkpoint and Workflow Tool Activity
 
-Scan for artifacts from common Claude Code workflow tools. Run whichever checks
-match the user's setup — skip any that don't exist.
+Scan for artifacts from common Claude Code workflow tools **scoped to the current project**.
+First, determine the project-specific paths. Run whichever checks match the user's setup —
+skip any that don't exist.
 
 ```bash
-# gstack checkpoints (if gstack is installed)
+# Determine the current project root and derive project-specific paths
+PROJECT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+
+# Create a reference file for time-based filtering
+REFERENCE_FILE=$(mktemp)
+touch -d "<window_start_iso>" "$REFERENCE_FILE" 2>/dev/null || touch -t "<window_start_touch>" "$REFERENCE_FILE"
+
+# gstack checkpoints (if gstack is installed) — scoped to current project slug
 if [ -d ~/.gstack/projects ]; then
-  echo "=== GSTACK CHECKPOINTS ==="
-  find ~/.gstack/projects/*/checkpoints/ -name "*.md" -newer <reference_file_or_date> 2>/dev/null | sort
+  SLUG=$(basename "$PROJECT_ROOT" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
+  if [ -d ~/.gstack/projects/"$SLUG"/checkpoints ]; then
+    echo "=== GSTACK CHECKPOINTS ==="
+    find ~/.gstack/projects/"$SLUG"/checkpoints/ -name "*.md" -newer "$REFERENCE_FILE" 2>/dev/null | sort
+  fi
 fi
 
-# Claude Code memory files (always available)
+# Claude Code memory files — scoped to current project path
+# Claude stores project memory using an encoded path, so find the right directory
 echo "=== MEMORY FILES ==="
-find ~/.claude/projects/*/memory/ -name "*.md" -newer <reference_file_or_date> -not -name "MEMORY.md" 2>/dev/null | sort
+ENCODED_PATH=$(echo "$PROJECT_ROOT" | sed 's|/|-|g; s|^-||')
+MEMORY_DIR="$HOME/.claude/projects/-${ENCODED_PATH}/memory"
+if [ -d "$MEMORY_DIR" ]; then
+  find "$MEMORY_DIR" -name "*.md" -newer "$REFERENCE_FILE" -not -name "MEMORY.md" 2>/dev/null | sort
+else
+  # Fallback: search for memory dirs matching the project name
+  find ~/.claude/projects/ -maxdepth 1 -type d -name "*$(basename "$PROJECT_ROOT")*" 2>/dev/null | while read dir; do
+    find "$dir/memory" -name "*.md" -newer "$REFERENCE_FILE" -not -name "MEMORY.md" 2>/dev/null
+  done | sort
+fi
+
+rm -f "$REFERENCE_FILE"
 ```
+
+Replace `<window_start_iso>` with the ISO date string (e.g., `2026-04-11T00:00:00`) and
+`<window_start_touch>` with the touch-compatible format (e.g., `202604110000`). These are
+derived from the time window parsed in the Time Window section above.
 
 ### 1.3 Current State
 - Read `TASKS.md` for work-in-progress items (if it exists)
@@ -83,9 +110,14 @@ Read each previous session file to compare trends.
 
 ### 1.5 Fresh Tool Knowledge (Optional)
 
-If the Context7 MCP server is connected (tools `mcp__context7__resolve-library-id` and
-`mcp__context7__query-docs` are available), pull current Claude Code documentation to
-catch features the user might not know about:
+**Note:** This step uses Context7 MCP tools which are session-level (available if the user
+has Context7 installed), not skill-level. They are NOT listed in `allowed-tools` above
+because MCP tools are granted by the user's session configuration, not by the skill.
+If the tools are not available in the current session, skip this step entirely.
+
+If the Context7 MCP server is connected (check whether tools `mcp__context7__resolve-library-id`
+and `mcp__context7__query-docs` exist in the current session), pull current Claude Code
+documentation to catch features the user might not know about:
 
 1. Resolve the Claude Code library ID:
    ```
@@ -96,9 +128,9 @@ catch features the user might not know about:
    mcp__context7__query-docs(libraryId: "<resolved_id>", query: "new features, recent changes, hooks, slash commands, keyboard shortcuts, workflows")
    ```
 
-If Context7 is not available, skip this step. Do NOT recommend tools or features based
-on training data alone — only recommend what you can verify exists right now via docs or
-the user's installed tools.
+If Context7 is not available, skip this step silently — do not warn or apologize. Do NOT
+recommend tools or features based on training data alone — only recommend what you can
+verify exists right now via docs or the user's installed tools.
 
 ## Phase 2: Analysis
 

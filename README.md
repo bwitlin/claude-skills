@@ -2,9 +2,10 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Skills: 3](https://img.shields.io/badge/Skills-3-purple.svg)](#skills)
+[![Rules: 1](https://img.shields.io/badge/Rules-1-orange.svg)](#rules)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-compatible-green.svg)](https://docs.anthropic.com/en/docs/claude-code)
 
-Claude Code skills by Brian Witlin.
+Claude Code skills and rules for self-improving workflows -- feedback loops, learning tools, and creative comparison.
 
 ## Skills
 
@@ -14,7 +15,17 @@ Claude Code skills by Brian Witlin.
 | [`/skill-battle`](#skill-battle) | Run multiple skills on the same task in parallel, compare side by side |
 | [`/eli5`](#eli5) | Explain any concept as a self-contained HTML page with analogies and visuals |
 
+## Rules
+
+| Rule | Description |
+|------|-------------|
+| [`active-context-header`](#active-context-header-1) | Adds a visible status line to every response showing which skill or mode is active |
+
+> Rules are not yet distributable via the plugin system ([tracking issue](https://github.com/anthropics/claude-code/issues/14200)). Install manually for now.
+
 ## Install
+
+### Skills
 
 ```bash
 # Add the marketplace
@@ -41,6 +52,21 @@ ln -sf ~/.claude/local-plugins/claude-skills/plugins/eli5/skills/eli5 ~/.claude/
 </details>
 
 > **Note:** Skills won't appear until your next Claude Code session. If a slash command doesn't work immediately, restart Claude Code.
+
+### Rules
+
+```bash
+# Clone the repo (if you haven't already)
+git clone https://github.com/bwitlin/claude-skills.git ~/.claude/local-plugins/claude-skills
+
+# Copy rules you want (project-level)
+mkdir -p .claude/rules
+cp ~/.claude/local-plugins/claude-skills/rules/active-context-header/active-context-header.md .claude/rules/
+
+# Or install globally (all projects)
+mkdir -p ~/.claude/rules
+cp ~/.claude/local-plugins/claude-skills/rules/active-context-header/active-context-header.md ~/.claude/rules/
+```
 
 ---
 
@@ -191,9 +217,38 @@ A dark-mode HTML page with:
 - **More detail** -- real terminology introduced by tying it back to the analogy, plus a "the part that trips people up" misconception callout
 - **Go deeper** -- 2-4 curated links with one-sentence reasons why each is worth clicking
 
+### Eval results
+
+The skill includes an eval suite (`plugins/eli5/evals/evals.json`) that tests three scenarios: a broad concept (blockchain), code explanation (async/await), and an abstract topic (machine learning). Each is run with and without the skill to measure the difference. Run evals locally to verify quality after changes.
+
 ### What it doesn't do
 
 It doesn't try to make you an expert. The goal is Bloom's levels 1-2: can you recall the core idea and explain it in your own words? If you want to apply, analyze, or build -- that's a different ask, and the "Go Deeper" links point you there.
+
+## active-context-header
+
+A communication rule that adds a visible status line to every Claude Code response showing which skill, mode, or context is currently active. When Claude switches between skills, the header announces the transition with a one-line description.
+
+### What it looks like
+
+```
+> /code-review
+
+Looking at the diff, there's an N+1 query on line 47...
+```
+
+On transitions:
+
+```
+> **Switching** from **/code-review** to **/debug**
+> **/debug** -- *Structured debugging with root cause investigation.*
+
+Starting with the stack trace you pasted...
+```
+
+When no skill is active, it shows `> Claude`.
+
+Useful during long sessions where multiple skills or workflows are used. You always know what mode Claude is operating in.
 
 ## License
 

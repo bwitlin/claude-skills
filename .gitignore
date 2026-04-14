@@ -1,0 +1,2 @@
+# Eval run results (output artifacts, not source)
+evals/*/iteration-*

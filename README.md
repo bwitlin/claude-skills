@@ -11,9 +11,9 @@ Claude Code skills and rules for self-improving workflows -- feedback loops, lea
 
 | Skill | Description |
 |-------|-------------|
-| [`/feedback`](#feedback) | Structured 5/5/5 self-assessment with evidence and trend tracking |
+| [`/feedback`](#feedback) | A mirror for your workflow -- 5/5/5 reports that track what's improving, escalate what isn't, and turn advice into automation |
 | [`/skill-battle`](#skill-battle) | Run multiple skills on the same task in parallel, compare side by side |
-| [`/eli5`](#eli5) | Explain any concept as a self-contained HTML page with analogies and visuals |
+| [`/eli5`](#eli5) | Make the complex simple -- research-backed explainer pages with analogies, visuals, and layered detail that open in your browser |
 
 ## Rules
 

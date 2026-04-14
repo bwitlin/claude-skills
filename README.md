@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Skills: 3](https://img.shields.io/badge/Skills-3-purple.svg)](#skills)
-[![Rules: 1](https://img.shields.io/badge/Rules-1-orange.svg)](#rules)
+[![Rules: 4](https://img.shields.io/badge/Rules-4-orange.svg)](#rules)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-compatible-green.svg)](https://docs.anthropic.com/en/docs/claude-code)
 
 Claude Code skills and rules for self-improving workflows -- feedback loops, learning tools, and creative comparison.
@@ -20,6 +20,9 @@ Claude Code skills and rules for self-improving workflows -- feedback loops, lea
 | Rule | Description |
 |------|-------------|
 | [`active-context-header`](#active-context-header-1) | Adds a visible status line to every response showing which skill or mode is active |
+| [`anti-sycophancy`](#anti-sycophancy) | Prevents Claude from flipping positions when challenged -- defend or explain what changed |
+| [`skill-dispatch-protocol`](#skill-dispatch-protocol) | Three-tier routing for skill invocation: auto-invoke, present options, or confirm destructive |
+| [`secret-file-protection`](#secret-file-protection) | Blocks reading .env, credentials, keys, and shell config files that contain secrets |
 
 > Rules are not yet distributable via the plugin system ([tracking issue](https://github.com/anthropics/claude-code/issues/14200)). Install manually for now.
 
@@ -249,6 +252,38 @@ Starting with the stack trace you pasted...
 When no skill is active, it shows `> Claude`.
 
 Useful during long sessions where multiple skills or workflows are used. You always know what mode Claude is operating in.
+
+## anti-sycophancy
+
+A behavioral rule that addresses one of the most common LLM failure modes: flipping positions the moment a user pushes back. Instead of silently reversing to agree, Claude will either defend its recommendation with reasoning or explicitly state what new information changed its assessment.
+
+Without this rule, you get an echo chamber. Every recommendation feels disposable because Claude will abandon it the moment you raise an eyebrow. With it, you get honest pushback -- the same thing you'd expect from a good colleague.
+
+### What it changes
+
+**Without the rule:** "Use Redis." → "Hmm, I'm not sure." → "You're right, Redis is overkill."
+
+**With the rule:** "Use Redis." → "Hmm, I'm not sure." → "I'd still recommend Redis here -- your access pattern is read-heavy with short TTLs. What's your concern?"
+
+## skill-dispatch-protocol
+
+A routing rule that structures how Claude decides which skill to invoke when a user message could match multiple installed skills. Uses a three-tier system:
+
+| Tier | When | What happens |
+|------|------|-------------|
+| **A** | One clear match, non-destructive | Announce + invoke immediately |
+| **B** | 2+ plausible matches | Present options, wait for user pick |
+| **C** | Destructive or shipping action | Confirm before invoking |
+
+This becomes valuable once you have 5+ skills installed. With a few skills, routing is obvious. With a dozen across productivity, engineering, design, and shipping -- the ambiguity grows fast. This rule makes the routing decision explicit and predictable instead of letting Claude guess silently.
+
+## secret-file-protection
+
+A security rule that prevents Claude from reading files that commonly contain secrets, API keys, or sensitive configuration. Covers `.env` files, key/certificate files (`.key`, `.pem`), credential stores (`credentials.json`, `serviceAccountKey.json`, `.netrc`, `.npmrc`), and shell configs that may export secrets (`.zshrc`, `.bashrc`).
+
+This is different from `.gitignore`. `.gitignore` prevents secrets from being committed. This rule prevents secrets from being *read into the conversation* -- once a secret enters the context window, it persists for the session. Different risk, different solution.
+
+For guaranteed enforcement, implement this as a [PreToolUse hook](https://docs.anthropic.com/en/docs/claude-code/hooks) that hard-blocks reads. The rule provides the logic; a hook provides the enforcement.
 
 ## Author
 

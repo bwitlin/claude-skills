@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2026-04-14
+
+### Added
+- `anti-sycophancy` rule -- prevents Claude from flipping positions when challenged, requires defending reasoning or explaining what changed
+- `skill-dispatch-protocol` rule -- three-tier routing for skill invocation (auto-invoke clear matches, present options for ambiguous, confirm destructive)
+- `secret-file-protection` rule -- blocks reading .env, credential, key, and shell config files that contain secrets
+
 ## [1.1.0] - 2026-04-14
 
 ### Added

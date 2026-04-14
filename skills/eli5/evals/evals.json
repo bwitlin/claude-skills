@@ -1,0 +1,23 @@
+{
+  "skill_name": "eli5",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "ELI5 what is a blockchain and why do people care about it",
+      "expected_output": "A layered explanation with a concrete analogy, visual diagram, analogy boundary note, and curated links. Should not assume any crypto knowledge.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "I keep seeing this pattern in our codebase and I have no idea what's going on:\n\nasync function fetchUserData(userId) {\n  try {\n    const response = await fetch(`/api/users/${userId}`);\n    const data = await response.json();\n    return data;\n  } catch (error) {\n    console.error('Failed to fetch user:', error);\n    throw error;\n  }\n}\n\nWhat does async/await actually do? Like explain it to me like I'm 5.",
+      "expected_output": "An explanation grounded in the specific code snippet. Should explain async/await with a concrete analogy, reference the actual lines of code, include a visual showing the flow, and note where the analogy breaks down.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "explain machine learning to me like I'm 5, I keep hearing about it but have no idea what it actually is",
+      "expected_output": "A broad, accessible explanation that doesn't assume any math or CS background. Should use a relatable analogy, include a visual, acknowledge the topic is genuinely complex, and provide links to great existing explanations like 3Blue1Brown or similar.",
+      "files": []
+    }
+  ]
+}

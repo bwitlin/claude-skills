@@ -12,7 +12,7 @@
     {
       "name": "feedback",
       "source": "./plugins/feedback",
-      "description": "A mirror for your workflow -- 5/5/5 reports that track what's improving, escalate what isn't, and turn advice into automation",
+      "description": "A workflow mirror. 5/5/5 reports that track what's improving, escalate what isn't, and turn repeat advice into automation",
       "version": "1.0.1",
       "keywords": ["feedback", "self-assessment", "productivity", "trend-tracking"],
       "category": "productivity"
@@ -20,7 +20,7 @@
     {
       "name": "skill-battle",
       "source": "./plugins/skill-battle",
-      "description": "Run multiple skills on the same task in parallel and compare outputs side by side",
+      "description": "A cage match for ideas -- run multiple skills on the same task in parallel and compare outputs side by side",
       "version": "1.0.0",
       "keywords": ["skill-battle", "compare", "split-test", "creative", "pitch-room", "A/B"],
       "category": "productivity"
@@ -28,7 +28,7 @@
     {
       "name": "eli5",
       "source": "./plugins/eli5",
-      "description": "Make the complex simple -- research-backed explainer pages with analogies, visuals, and layered detail that open in your browser",
+      "description": "Simple, visual, concrete explanations for adults who want the aha moment without the jargon. Research-backed, opens in your browser",
       "version": "1.0.0",
       "keywords": ["eli5", "explain", "teaching", "learning", "analogy", "visualization"],
       "category": "education"

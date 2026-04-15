@@ -11,20 +11,20 @@ Claude Code skills and rules for self-improving workflows -- feedback loops, lea
 
 | Skill | Description |
 |-------|-------------|
-| [`/feedback`](#feedback) | A mirror for your workflow -- 5/5/5 reports that track what's improving, escalate what isn't, and turn advice into automation |
-| [`/skill-battle`](#skill-battle) | Run multiple skills on the same task in parallel, compare side by side |
-| [`/eli5`](#eli5) | Make the complex simple -- research-backed explainer pages with analogies, visuals, and layered detail that open in your browser |
+| [`/feedback`](#feedback) | A workflow mirror. 5/5/5 reports that track what's improving, escalate what isn't, and turn repeat advice into automation |
+| [`/skill-battle`](#skill-battle) | A cage match for ideas -- run multiple skills on the same task in parallel and compare outputs side by side |
+| [`/eli5`](#eli5) | Simple, visual, concrete explanations for adults who want the aha moment without the jargon. Research-backed, opens in your browser |
 
 ## Rules
 
 | Rule | Description |
 |------|-------------|
-| [`active-context-header`](#active-context-header-1) | Status line on every response showing the active skill, project, and task state -- with explicit waiting, blocked, and pivot states |
-| [`anti-sycophancy`](#anti-sycophancy) | Prevents Claude from flipping positions when challenged -- defend or explain what changed |
-| [`skill-dispatch-protocol`](#skill-dispatch-protocol) | Three-tier routing for skill invocation: auto-invoke, present options, or confirm destructive |
+| [`active-context-header`](#active-context-header-1) | Who? Where? What? -- on every response. Active skill, current project, and one of five task states: in progress, completed-and-next, pivoting, waiting on you, or blocked |
+| [`anti-sycophancy`](#anti-sycophancy) | Cures Claude's overly agreeable caving problem. Defend the recommendation with evidence when pushed back, or name the new data that changed your mind |
+| [`skill-dispatch-protocol`](#skill-dispatch-protocol) | Three-tier routing for which skill fires when your message could match more than one. Auto-invoke when obvious, present options when ambiguous, confirm before anything destructive |
 | [`secret-file-protection`](#secret-file-protection) | Blocks reading .env, credentials, keys, and shell config files that contain secrets |
-| [`confidence-signaling`](#confidence-signaling) | Adds explicit "I know" / "I think" / "I'm not sure" labels so you know what to trust |
-| [`execution-mode`](#execution-mode) | Switches Claude to action-first mode during workflows -- one action per response, no lectures |
+| [`confidence-signaling`](#confidence-signaling) | Three confidence labels ("I know" / "I think" / "I'm not sure") plus an evidence-strength grade (strong / medium / weak). You always know which claims to trust and how solid the data behind them is |
+| [`execution-mode`](#execution-mode) | For humans with limited context windows. One action per response, no lectures, no education -- just the next thing to do |
 
 > Rules are not yet distributable via the plugin system ([tracking issue](https://github.com/anthropics/claude-code/issues/14200)). Install manually for now.
 

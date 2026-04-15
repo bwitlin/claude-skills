@@ -1,2 +1,9 @@
 # Eval run results (output artifacts, not source)
 evals/*/iteration-*
+
+# Local-only ops docs (not meant for public repo)
+CLAUDE.md
+MAINTENANCE.md
+
+# gstack session state, analytics, reviews
+.gstack/

@@ -19,7 +19,7 @@ Claude Code skills and rules for self-improving workflows -- feedback loops, lea
 
 | Rule | Description |
 |------|-------------|
-| [`active-context-header`](#active-context-header-1) | Adds a visible status line to every response showing which skill or mode is active |
+| [`active-context-header`](#active-context-header-1) | Status line on every response showing the active skill, project, and task state -- with explicit waiting, blocked, and pivot states |
 | [`anti-sycophancy`](#anti-sycophancy) | Prevents Claude from flipping positions when challenged -- defend or explain what changed |
 | [`skill-dispatch-protocol`](#skill-dispatch-protocol) | Three-tier routing for skill invocation: auto-invoke, present options, or confirm destructive |
 | [`secret-file-protection`](#secret-file-protection) | Blocks reading .env, credentials, keys, and shell config files that contain secrets |
@@ -232,28 +232,49 @@ It doesn't try to make you an expert. The goal is Bloom's levels 1-2: can you re
 
 ## active-context-header
 
-A communication rule that adds a visible status line to every Claude Code response showing which skill, mode, or context is currently active. When Claude switches between skills, the header announces the transition with a one-line description.
+A structured status line on every Claude Code response that tells you exactly what Claude is doing — the active skill, the project in scope, and the task state. Not just "what mode is Claude in?" but "is Claude working, waiting on me, blocked, pivoting, or handing off?" — in a single blockquote above the response body.
+
+### Format
+
+```
+> <Subject> in project <ProjectName> <verb phrase>
+```
+
+- **Subject** -- active skill (`/investigate`, `/ship`, etc.) or `Claude Generalist` if none
+- **ProjectName** -- derived from task context, not just the session root (so cross-project drift is visible)
+- **Verb phrase** -- one of five state templates, capped at 8 words
+
+### The five states
+
+| State | Example |
+|---|---|
+| **IN PROGRESS** | `is editing checkout validator` |
+| **COMPLETED + NEXT** | `completed drafting release notes, now opening PR` |
+| **PIVOT** | `was debugging hook but switching to checking config` |
+| **WAITING** | `is waiting for database credentials` |
+| **BLOCKED** | `is blocked on failing pre-commit hook` |
+
+The WAITING and BLOCKED states are the valuable ones. Regular Claude Code output can bury "I need input from you" three paragraphs deep. With this rule, it's in the first line of the response and you see it before you start reading.
 
 ### What it looks like
 
 ```
-> /code-review
+> /ship in project Payments Service completed drafting release notes, now opening PR
 
-Looking at the diff, there's an N+1 query on line 47...
+Drafting the PR body now...
 ```
 
-On transitions:
+On skill transitions, two extra lines appear above the narrative:
 
 ```
-> **Switching** from **/code-review** to **/debug**
-> **/debug** -- *Structured debugging with root cause investigation.*
+> **Switching skills** from **/edit** to **/ship**
+> **/ship** -- *Pre-flight PR workflow.*
+> /ship in project Claude completed editing rule, now drafting commit message
 
-Starting with the stack trace you pasted...
+Starting with the diff...
 ```
 
-When no skill is active, it shows `> Claude`.
-
-Useful during long sessions where multiple skills or workflows are used. You always know what mode Claude is operating in.
+Useful during long sessions where multiple skills and projects are in play. You always know what mode Claude is in, what it's working on, and whether it's stuck.
 
 ## anti-sycophancy
 

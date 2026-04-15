@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2026-04-15
+
+### Changed
+- `active-context-header` rule -- expanded from a simple skill label into a structured status line with explicit task states. The header now follows the grammar `> <Subject> in project <ProjectName> <verb phrase>` and uses five state templates (IN PROGRESS, COMPLETED + NEXT, PIVOT, WAITING, BLOCKED). Task phrases are capped at 8 words. Project name is derived from task context (not session root) so cross-project drift is visible. Skill transitions now use a three-line blockquote (switch line, skill description, narrative). Users on the previous version should re-copy `rules/active-context-header/active-context-header.md` to adopt the new format.
+
 ## [1.3.0] - 2026-04-14
 
 ### Added

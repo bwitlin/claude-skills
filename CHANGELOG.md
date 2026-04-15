@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2026-04-15
+
+### Changed
+- `CLAUDE.md` — added a top-of-file pointer instructing any Claude Code session to read and follow `MAINTENANCE.md` before committing and pushing changes to the public repo. The trigger is narrowed to the push (not every local edit) so exploration and experimentation are not over-constrained.
+
 ## [1.4.0] - 2026-04-15
 
 ### Changed

@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2026-04-21
+
+### Added
+- `question-theatre` rule — stops Claude from stalling out before executing clear instructions. When direction is explicit and non-destructive, Claude should execute rather than ask "want me to...?" on a path already chosen.
+- `ux-instruction-recall` rule — forces Claude to search current docs before writing menu paths, keyboard shortcuts, or settings instructions for SaaS tools. Training-data recall on UX paths is wrong often enough to be the default-failure case.
+- `exemplar-library` — a companion pack of 10 before/after pairs covering the two patterns above (5 pairs each). Designed to be loaded into session context via the `@path` import syntax in `CLAUDE.md`. The library teaches the shape of the right response; the rules explain the why.
+
+### Fixed
+- `active-context-header` rule — typo in body line: "Verb phrase: 8 words maximum" → "Task phrase: 8 words maximum" (the grammar above already described the overall sentence structure as "verb phrase"; the constraint is specifically on the task phrase within it).
+
 ## [1.4.1] - 2026-04-15
 
 ### Changed

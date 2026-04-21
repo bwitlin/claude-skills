@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Skills: 3](https://img.shields.io/badge/Skills-3-purple.svg)](#skills)
-[![Rules: 6](https://img.shields.io/badge/Rules-6-orange.svg)](#rules)
+[![Rules: 9](https://img.shields.io/badge/Rules-9-orange.svg)](#rules)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-compatible-green.svg)](https://docs.anthropic.com/en/docs/claude-code)
 
 Claude Code skills and rules for self-improving workflows -- feedback loops, learning tools, and creative comparison.
@@ -25,6 +25,9 @@ Claude Code skills and rules for self-improving workflows -- feedback loops, lea
 | [`secret-file-protection`](#secret-file-protection) | Blocks reading .env, credentials, keys, and shell config files that contain secrets |
 | [`confidence-signaling`](#confidence-signaling) | Three confidence labels ("I know" / "I think" / "I'm not sure") plus an evidence-strength grade (strong / medium / weak). You always know which claims to trust and how solid the data behind them is |
 | [`execution-mode`](#execution-mode) | For humans with limited context windows. One action per response, no lectures, no education -- just the next thing to do |
+| [`question-theatre`](#question-theatre) | Stops Claude from stalling out before executing clear instructions. No more "want me to read the spec?" after you already said "let's go" |
+| [`ux-instruction-recall`](#ux-instruction-recall) | Forces Claude to search current docs before writing menu paths and keyboard shortcuts for SaaS tools. Training-data recall on UX paths is wrong by default |
+| [`exemplar-library`](#exemplar-library) | A companion pack of 10 before/after pairs that teach Claude by showing, not telling. Pairs with the behavioral rules above |
 
 > Rules are not yet distributable via the plugin system ([tracking issue](https://github.com/anthropics/claude-code/issues/14200)). Install manually for now.
 
@@ -319,6 +322,51 @@ Also includes an evidence-grading system: **Strong** (official docs, direct test
 A workflow rule that switches Claude into action-first mode during multi-step tasks. One action per response, no lectures, no education -- just the next thing to do. Includes frustration detection (shorter, more emphatic user responses trigger simpler Claude responses) and walk-away tags for long-running processes.
 
 Exploring a concept? Claude teaches. Deploying to production? Claude executes. This rule makes Claude match your mode instead of defaulting to verbose explanations during every interaction.
+
+## question-theatre
+
+A behavioral rule that stops Claude from stalling out before executing clear instructions. When your direction is explicit and non-destructive, Claude should just do it — not perform deliberation by asking "want me to...?" on a path already chosen.
+
+Every fake question costs a user turn. It feels careful, but it's actually the opposite of careful — it performs deliberation on a decision already made, while the real work sits idle.
+
+### What it changes
+
+**Without:** "let's go" → "Want me to read the spec first to verify?" → "yes" → "And then should I apply the changes or show you a diff first?"
+
+**With:** "let's go" → [reads the spec, then executes]
+
+Reserve questions for **genuine forks** — multiple defensible paths, or destructive actions gated by an explicit confirmation word.
+
+## ux-instruction-recall
+
+A behavioral rule that forces Claude to search current docs before writing menu paths, keyboard shortcuts, or settings instructions for any SaaS tool — Figma, Notion, Linear, Cursor, Vercel, Supabase Dashboard, etc. Training-data recall on UX paths is wrong often enough to be the default-failure case.
+
+SaaS tools redesign constantly. A confident-sounding instruction from memory wastes hours when the user opens the tool and nothing is where Claude said it would be. Current docs are one search away, and the citation proves it.
+
+### What it changes
+
+**Without:** "To change the global font in Figma: Edit → Replace fonts..." [wrong — no such menu]
+
+**With:** "Let me check the current Figma docs first. [runs WebSearch] Per Figma's help center: Edit menu → Select all with same font, then change font in the right panel. Sources: https://help.figma.com/hc/en-us/articles/360039957774"
+
+Pairs with the [exemplar-library](#exemplar-library) for 5 concrete before/after examples across Figma, Cursor, Linear, Vercel, and Supabase.
+
+## exemplar-library
+
+A companion pack of **10 before/after pairs** that teach Claude Code how to handle two common failure modes by showing concrete examples instead of abstract rules. Load it into your session context via the `@path` import syntax in `CLAUDE.md` to give Claude a pattern-matching library it can check before generating the first token.
+
+Anthropic's prompt-engineering guidance recommends examples and multishot prompting as one of the most effective ways to shape model behavior. A concrete "bad turn → good turn" pair changes behavior more reliably than a long prose rule explanation.
+
+### Coverage
+
+| Pattern | Failure mode it addresses |
+|---|---|
+| **Question-theatre** | Asking permission before already-authorized work — 5 pairs across "let's go", menu-building, permission prompts, and file lookups |
+| **UX-instruction recall** | Hallucinating outdated UX paths — 5 pairs across Figma, Cursor, Linear, Vercel, and Supabase |
+
+Rules tell Claude what *not* to do. Exemplars show what *to* do. Both are load-bearing — rules without examples get interpreted creatively, examples without rules have no generalizing principle. This library is the positive-guidance half.
+
+Expand it: when you catch Claude in a new failure mode, write the bad/good pair and add it. The pair is the fix.
 
 ## Author
 

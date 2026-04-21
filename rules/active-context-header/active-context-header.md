@@ -18,7 +18,7 @@ Grammar: `> <Subject> in project <ProjectName> <verb phrase>`
 | **WAITING** | `is waiting for <what from user>` | Ball is in user's court. Blocked on their input or decision. | `is waiting for confirmation to run migration` |
 | **BLOCKED** | `is blocked on <short reason>` | Cannot proceed. Reason explained in response body. | `is blocked on missing API key` |
 
-**Verb phrase: 8 words maximum.** If it will not fit, compress. NEVER skip the header.
+**Task phrase: 8 words maximum.** If it will not fit, compress. NEVER skip the header.
 
 **Verbs:** Use active progressive forms. Avoid stative verbs (`is knowing`, `is understanding` are ungrammatical). Fallbacks when no natural verb exists: `is analyzing`, `is reviewing`, `is considering`, `is reading`.
 
